@@ -1,0 +1,21 @@
+{
+  "name": "message-wall",
+  "version": "1.0.0",
+  "description": "simple api for writing down messages. like grafiti on a bathroom wall.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Flexicon",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "eslint": "^5.0.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
