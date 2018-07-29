@@ -6,7 +6,8 @@ const MessagesController = {
 
     Message.find()
       .sort('-timestamp')
-      .limit(limit)
+      .limit(+limit)
+      .lean()
       .then(messages => res.send({ messages }))
       .catch(err => next(err));
   },

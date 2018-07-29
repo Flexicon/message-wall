@@ -1,4 +1,4 @@
-const mongoose = require('./mongo');
+const mongoose = require('mongoose');
 
 // Mongoose schema and model
 const messageSchema = mongoose.Schema({

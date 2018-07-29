@@ -5,19 +5,23 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "NODE_ENV=DEV PORT=8080 nodemon src/index.js",
-    "test": "mocha tests/*.spec.js"
+    "dev": "MONGODB_URL=mongodb://mongodb:27017/wall NODE_ENV=DEV PORT=8080 nodemon src/index.js",
+    "test": "NODE_ENV=TEST PORT=8080 mocha tests/*.spec.js",
+    "lint": "eslint ./src"
   },
   "author": "Flexicon",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "mongoose": "^5.2.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^5.0.1",
+    "eslint-plugin-mocha": "^5.1.0",
     "eslint-plugin-prettier": "^2.6.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5",

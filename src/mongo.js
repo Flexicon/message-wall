@@ -4,8 +4,8 @@ mongoose.connect(
   process.env.MONGODB_URL,
   {
     useNewUrlParser: true,
-    replicaSet: process.env.MONGODB_REPLICA_SET || 'Cluster0-shard-0',
-    ssl: process.env.MONGODB_SSL || true,
+    replicaSet: process.env.MONGODB_REPLICA_SET || null,
+    ssl: process.env.MONGODB_SSL || false,
     retryWrites: process.env.MONGODB_RETRY_WRITES || true,
     authSource: process.env.MONGODB_AUTH_SOURCE || 'admin'
   }
