@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "MONGODB_URL=mongodb://mongodb:27017/wall NODE_ENV=DEV PORT=8080 nodemon src/index.js",
-    "test": "NODE_ENV=TEST PORT=8080 mocha tests/*.spec.js",
+    "test": "NODE_ENV=TEST PORT=8080 mocha --timeout 10000 tests/*.spec.js",
     "lint": "eslint ./src"
   },
   "author": "Flexicon",
