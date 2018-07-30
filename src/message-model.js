@@ -1,4 +1,4 @@
-const mongoose = require('./mongo');
+const mongoose = require('mongoose');
 
 // Mongoose schema and model
 const messageSchema = mongoose.Schema({
@@ -6,6 +6,6 @@ const messageSchema = mongoose.Schema({
   author: String,
   timestamp: { type: Date, default: Date.now }
 });
-const Message = mongoose.model('movie', messageSchema);
+const Message = mongoose.model('message', messageSchema);
 
 module.exports = Message;

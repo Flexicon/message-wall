@@ -3,7 +3,7 @@ const router = express.Router();
 const MessagesController = require('./messages-controller');
 
 // Parser for post data
-router.use(express.urlencoded());
+router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.get('/', (req, res) => {

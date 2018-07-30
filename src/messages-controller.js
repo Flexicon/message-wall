@@ -1,16 +1,17 @@
 const Message = require('./message-model');
 
 const MessagesController = {
-  index: function(req, res, next) {
+  index: (req, res, next) => {
     const limit = req.query.limit || 100;
 
     Message.find()
       .sort('-timestamp')
-      .limit(limit)
+      .limit(+limit)
+      .lean()
       .then(messages => res.send({ messages }))
       .catch(err => next(err));
   },
-  create: function(req, res, next) {
+  create: (req, res, next) => {
     const { text, author } = req.body;
 
     if (!text || !author) {
@@ -24,7 +25,7 @@ const MessagesController = {
       .then(message => res.send({ msg: 'Message created', message }))
       .catch(err => next(err));
   },
-  remove: function(req, res, next) {
+  remove: (req, res, next) => {
     const { id } = req.body;
 
     if (!id) {
@@ -32,8 +33,14 @@ const MessagesController = {
       return;
     }
 
-    Message.deleteOne({ _id: id })
-      .then(() => res.send({ msg: 'Message deleted' }))
+    Message.findByIdAndRemove({ _id: id })
+      .then(msg => {
+        if (msg) {
+          res.send({ msg: 'Message deleted' });
+        } else {
+          res.status(404).send({ msg: 'Message not found' });
+        }
+      })
       .catch(err => next(err));
   }
 };
