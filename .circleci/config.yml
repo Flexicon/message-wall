@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/message-wall
     docker:
-      - image: node:10.6
+      - image: node:alpine
     steps:
       - add_ssh_keys
       - checkout
