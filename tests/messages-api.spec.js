@@ -1,5 +1,9 @@
 // check for mongo url environment variable
-process.env.MONGODB_URL = process.env.MONGODB_URL || 'mongodb://mongodb:27017/testwall';
+if (!process.env.MONGODB_URL) {
+  process.env.MONGODB_URL = 'mongodb://mongodb:27017/testwall';
+  process.env.MONGODB_REPLICA_SET = null;
+  process.env.MONGODB_SSL = false;
+}
 
 const Message = require('../src/message-model');
 const chai = require('chai');
