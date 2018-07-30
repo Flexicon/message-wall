@@ -6,6 +6,6 @@ const messageSchema = mongoose.Schema({
   author: String,
   timestamp: { type: Date, default: Date.now }
 });
-const Message = mongoose.model('movie', messageSchema);
+const Message = mongoose.model('message', messageSchema);
 
 module.exports = Message;

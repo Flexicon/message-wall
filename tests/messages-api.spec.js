@@ -112,6 +112,42 @@ describe('Messages API', function() {
           });
       });
     });
+
+    describe('DELETE', () => {
+      let testMsgID;
+
+      before(done => {
+        const message = { text: 'This is a new message!', author: 'Dude guy' }
+        Message.create(message).then(result => {
+          testMsgID = result._id.toString();
+          done();
+        });
+      });
+
+      it('it should DELETE a message', done => {
+        chai
+          .request(app)
+          .del('/messages')
+          .send({ id: testMsgID })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property('msg').eql('Message deleted');
+            done();
+          });
+      });
+
+      it('it should fail to DELETE a nonexistent message', done => {
+        chai
+          .request(app)
+          .del('/messages')
+          .send({ id: '5b5ec92f08b2681d7e9a82f9' })
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.have.property('msg').eql('Message not found');
+            done();
+          });
+      });
+    });
   });
 
   after(() => {
