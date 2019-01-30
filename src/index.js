@@ -16,13 +16,11 @@ app.use('/', Router);
 
 // Error handler
 app.use(function(err, req, res, next) {
-  // eslint-disable-next-line
   console.error(chalk.red('An error occurred: '), err);
   res.status(500).send({ msg: 'An unexpected error has occurred', err: err.message });
 });
 
 const server = app.listen(port, function() {
-  // eslint-disable-next-line
   console.log('message-wall listening on port ' + port);
 });
 

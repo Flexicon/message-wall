@@ -1,8 +1,8 @@
 // check for mongo url environment variable
 if (!process.env.MONGODB_URL) {
   process.env.MONGODB_URL = 'mongodb://mongodb:27017/testwall';
-  process.env.MONGODB_REPLICA_SET = null;
-  process.env.MONGODB_SSL = false;
+  delete process.env.MONGODB_SSL;
+  delete process.env.MONGODB_REPLICA_SET;
 }
 
 const Message = require('../src/message-model');
