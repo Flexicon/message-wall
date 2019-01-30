@@ -4,12 +4,13 @@ services:
     image: mongo
     volumes:
       - mongo_data:/data/db
+
   express:
     build: .
     depends_on:
       - mongodb
     volumes:
-      - ./:/app
+      - ./:/app:cached
     ports:
       - "8080:8080"
     stdin_open: false

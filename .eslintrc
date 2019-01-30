@@ -4,7 +4,8 @@
   },
   "rules": {
     "prettier/prettier": ["error"],
-    "no-unused-vars": ["error", { "args": "none", "ignoreRestSiblings": false }]
+    "no-unused-vars": ["error", { "args": "none", "ignoreRestSiblings": false }],
+    "no-console": "off"
   },
   "env": {
     "browser": true,
