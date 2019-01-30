@@ -117,7 +117,7 @@ describe('Messages API', function() {
       let testMsgID;
 
       before(done => {
-        const message = { text: 'This is a new message!', author: 'Dude guy' }
+        const message = { text: 'This is a new message!', author: 'Dude guy' };
         Message.create(message).then(result => {
           testMsgID = result._id.toString();
           done();
