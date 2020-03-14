@@ -12,7 +12,7 @@
   "author": "Flexicon",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^3.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongoose": "^5.2.1"
@@ -20,11 +20,11 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "eslint": "^5.0.1",
-    "eslint-plugin-mocha": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^6.3.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2",
     "prettier": "^1.16.2"
   }
 }
