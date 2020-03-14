@@ -1,31 +1,28 @@
-const express = require('express');
-const cors = require('cors');
-const chalk = require('chalk');
-const app = express();
-const port = process.env.PORT || 8080;
+const express = require('express')
+const cors = require('cors')
+const chalk = require('chalk')
 
-// Setup database
-const mongo = require('./mongo');
+const db = require('./mongo')
+const Router = require('./router')
 
-// Apply CORS headers
-app.use(cors());
+const app = express()
+const port = process.env.PORT || 8080
 
-// Routes
-const Router = require('./router');
-app.use('/', Router);
+app.use(cors())
+app.use('/', Router)
 
 // Error handler
 app.use(function(err, req, res, next) {
-  console.error(chalk.red('An error occurred: '), err);
-  res.status(500).send({ msg: 'An unexpected error has occurred', err: err.message });
-});
+  console.error(chalk.red('An error occurred: '), err)
+  res.status(500).send({ msg: 'An unexpected error has occurred', err: err.message })
+})
 
 const server = app.listen(port, function() {
-  console.log('message-wall listening on port ' + port);
-});
+  console.log('message-wall listening on port ' + port)
+})
 
 module.exports = {
   app,
   server,
-  mongo
-};
+  db,
+}

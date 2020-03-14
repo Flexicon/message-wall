@@ -1,48 +1,58 @@
-const Message = require('./message-model');
+const Message = require('./message-model')
 
 const MessagesController = {
-  index: (req, res, next) => {
-    const limit = req.query.limit || 100;
+  index: async (req, res, next) => {
+    const limit = req.query.limit || 100
 
-    Message.find()
-      .sort('-timestamp')
-      .limit(+limit)
-      .lean()
-      .then(messages => res.send({ messages }))
-      .catch(err => next(err));
+    try {
+      const messages = await Message.find()
+        .sort('-timestamp')
+        .limit(+limit)
+        .lean()
+
+      res.send(messages)
+    } catch (err) {
+      next(err)
+    }
   },
-  create: (req, res, next) => {
-    const { text, author } = req.body;
+
+  create: async (req, res, next) => {
+    const { text, author } = req.body
 
     if (!text || !author) {
       res
-        .status(400)
-        .send({ msg: 'Missing parameters', err: 'Parameters text and author are required' });
-      return;
+        .status(422)
+        .send({ msg: 'Missing parameters', err: 'Parameters text and author are required' })
+      return
     }
 
-    Message.create({ text, author })
-      .then(message => res.send({ msg: 'Message created', message }))
-      .catch(err => next(err));
+    try {
+      const message = await Message.create({ text, author })
+      res.status(201).send(message)
+    } catch (err) {
+      next(err)
+    }
   },
-  remove: (req, res, next) => {
-    const { id } = req.body;
+
+  remove: async (req, res, next) => {
+    const { id } = req.params
 
     if (!id) {
-      res.status(400).send({ msg: 'Missing parameters', err: 'Parameter id is required' });
-      return;
+      res.status(422).send({ msg: 'Missing parameters', err: 'Parameter id is required' })
+      return
     }
 
-    Message.findByIdAndRemove({ _id: id })
-      .then(msg => {
-        if (msg) {
-          res.send({ msg: 'Message deleted' });
-        } else {
-          res.status(404).send({ msg: 'Message not found' });
-        }
-      })
-      .catch(err => next(err));
-  }
-};
+    try {
+      const found = await Message.findByIdAndRemove(id)
+      if (found) {
+        res.status(204).send()
+      } else {
+        res.status(404).send({ msg: 'Message not found' })
+      }
+    } catch (err) {
+      next(err)
+    }
+  },
+}
 
-module.exports = MessagesController;
+module.exports = MessagesController
