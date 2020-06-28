@@ -6,7 +6,7 @@ services:
       - mongo_data:/data/db
 
   express:
-    build: .
+    build: .docker/
     depends_on:
       - mongodb
     volumes:
