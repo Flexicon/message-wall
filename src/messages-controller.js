@@ -1,5 +1,7 @@
 const Message = require('./message-model')
 
+const serializeMessage = ({ _id: id, text, author }) => ({ id, text, author })
+
 const MessagesController = {
   index: async (req, res, next) => {
     const limit = req.query.limit || 100
@@ -10,7 +12,7 @@ const MessagesController = {
         .limit(+limit)
         .lean()
 
-      res.send(messages)
+      res.send(messages.map(serializeMessage))
     } catch (err) {
       next(err)
     }
@@ -28,7 +30,7 @@ const MessagesController = {
 
     try {
       const message = await Message.create({ text, author })
-      res.status(201).send(message)
+      res.status(201).send(serializeMessage(message))
     } catch (err) {
       next(err)
     }
